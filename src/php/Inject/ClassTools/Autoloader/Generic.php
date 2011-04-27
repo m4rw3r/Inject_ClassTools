@@ -31,6 +31,7 @@ namespace Inject\ClassTools\Autoloader;
  *     ));
  * 
  * $loader->register();
+ * </code>
  */
 class Generic
 {
@@ -144,7 +145,7 @@ class Generic
 		}
 		else
 		{
-			$path = strtr(substr($class, $index), '_', DIRECTORY_SEPARATOR).'.php';
+			$path = strtr($class, '_', DIRECTORY_SEPARATOR).'.php';
 		}
 		
 		foreach($this->namespaces as $name => $package_path)
