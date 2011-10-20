@@ -27,7 +27,7 @@ namespace Inject\ClassTools\Autoloader;
  * // Only search current directory and specific vendor dirs:
  * $loader = new Inject\ClassTools\Autoloader\Generic(__DIR__, 
  *     array(
- *         'InjectStack' => __DIR__.'/vendor/InjectStack'
+ *         'Inject\\Stack' => __DIR__.'/vendor/InjectStack'
  *     ));
  * 
  * $loader->register();
@@ -43,7 +43,7 @@ class Generic
 	protected $paths = array();
 	
 	/**
-	 * Path-fragment => path mappings.
+	 * Path-fragment => path mapping.
 	 * 
 	 * @var array(string => string)
 	 */
@@ -76,7 +76,7 @@ class Generic
 	{
 		foreach($namespaces as $prefix => $path)
 		{
-			$this->namespaces[trim(strtr($prefix, '\\_', DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR] = $path;
+			$this->namespaces[trim(strtr($prefix, '\\_', DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR] = realpath($path);
 		}
 	}
 	
@@ -152,7 +152,7 @@ class Generic
 		{
 			if(strpos($path, $name) === 0)
 			{
-				$file_path = $package_path.substr($path, strlen($name)-1);
+				$file_path = $package_path.substr($path, strlen($name) - 1);
 				
 				if(file_exists($file_path))
 				{
