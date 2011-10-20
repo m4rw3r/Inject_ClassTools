@@ -78,7 +78,8 @@ class GenericTest extends \PHPUnit_Framework_TestCase
 			'Ns\\Namespaced'          => 'Ns/Namespaced.php',
 			'Ns\\Namespaced\\Deep'    => 'Ns/Namespaced/Deep.php',
 			'Deep\\Leveled\\Ns\\Root' => 'DeepNamespace/Root.php',
-			'Strange\\NotNsed'        => 'Strange/NotNsed.php'
+			'Strange\\NotNsed'        => 'Strange/NotNsed.php',
+			'Under_Scored_Ns\\File'   => 'Under_Scored_Ns/File.php'
 		);
 		
 		foreach($classes as $class => $file)
