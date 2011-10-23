@@ -11,7 +11,7 @@ namespace Inject\ClassTools;
  * Exception telling that a conflicting class name was discovered
  * by the class finder.
  */
-class ClassConflictException extends \RuntimeException implements \Inject\Exception
+class ClassConflictException extends \RuntimeException
 {
 	// TODO: Is this threshold good?
 	const MAX_MESSAGE_LENGTH = 40;
