@@ -7,6 +7,8 @@
 
 namespace Inject\ClassTools;
 
+use \Exception;
+
 /**
  * Searches trough a set of paths for classes, returns a list of classes
  * and in which file they are located, does NOT include the files.
@@ -60,20 +62,78 @@ class ClassFinder
 	// ------------------------------------------------------------------------
 	
 	/**
-	 * @param  string|array
-	 * @param  string
-	 * @param  int
+	 * @param  string|array  A list of paths to search for classes (array if more
+	 *                       than one path)
+	 * @param  string        The PCRE regular expression to use to filter classes
 	 */
 	function __construct($paths = '.', $file_regex = '/\.php$/')
 	{
-		foreach((Array) $paths as $p)
+		$this->file_regex = $file_regex;
+		
+		$this->addPaths((Array) $paths);
+	}
+	
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Adds a list of paths to search for classes.
+	 * 
+	 * @param  array
+	 * @return void
+	 */
+	public function addPaths(array $paths)
+	{
+		foreach($paths as $path)
 		{
-			$this->paths[] = realpath($p);
+			$real = realpath($path);
+			
+			if( ! $real)
+			{
+				throw new Exception(sprintf('Folder "%s" does not exist!', $path));
+			}
+			
+			$this->paths[] = $real;
 		}
 		
 		// array_unique() will fix problems with eg. PHP's include path
-		$this->paths      = array_unique($this->paths);
-		$this->file_regex = $file_regex;
+		$this->paths = array_unique($this->paths);
+	}
+	
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Returns a list of paths which the class finder searches for classes.
+	 * 
+	 * @return array
+	 */
+	public function getPaths()
+	{
+		return $this->paths;
+	}
+	
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Sets the regular expression which used to match files to search for classes.
+	 * 
+	 * @param  string
+	 * @return void
+	 */
+	public function setFileRegex($regex)
+	{
+		$this->file_regex = $regex;
+	}
+	
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Returns the regular expression used to match file to search for classes.
+	 * 
+	 * @return string
+	 */
+	public function getFileRegex()
+	{
+		return $this->file_regex;
 	}
 	
 	// ------------------------------------------------------------------------
