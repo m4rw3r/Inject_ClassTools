@@ -51,6 +51,22 @@ ${contents}
 	<changelog>
 		<release>
 			<version>
+				<release>0.2.0</release>
+				<api>0.2</api>
+			</version>
+			<stability>
+				<release>beta</release>
+				<api>Beta</api>
+			</stability>
+			<date>2011-04-22</date>
+			<license>All rights reserved</license>
+			<notes>
+				* Added classmap autoloader creator
+				* General improvements
+			</notes>
+		</release>
+		<release>
+			<version>
 				<release>0.1.0</release>
 				<api>0.1</api>
 			</version>
